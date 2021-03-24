@@ -3,7 +3,6 @@
 ## Requirements
 
 - FFmpeg
-- NodeJS 15+
 - Python 3.7+
 
 ## Deployment
