@@ -16,7 +16,7 @@ Use the buttons below to know more about me.""",
             [
                 [
                     InlineKeyboardButton(
-                        "⚒ Source code", url="https://t.me/CallsMusic"
+                        "⚒ Source code", url="https://github.com/callsmusic/callsmusic"
                     )
                 ],
                 [
