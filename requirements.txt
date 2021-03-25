@@ -3,4 +3,3 @@ TgCrypto
 pytgcalls
 python-dotenv
 youtube_dl
-youtube_search_python
