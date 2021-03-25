@@ -41,7 +41,7 @@ async def stop(_, message: Message):
         except QueueEmpty:
             pass
 
-        callsmusic.stop(message.chat.id)
+        await callsmusic.stop(message.chat.id)
         await message.reply_text("Cleared the queue and left the call!")
 
 
