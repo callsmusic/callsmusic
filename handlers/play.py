@@ -64,7 +64,7 @@ async def play(_, message: Message):
 
     if message.chat.id in callsmusic.active_chats:
         position = await queues.put(message.chat.id, file=file)
-        await res.edit_text(f"*️Queued at position {position}!")
+        await res.edit_text(f"Queued at position {position}!")
     else:
         await res.edit_text("Playing...")
         await callsmusic.set_stream(message.chat.id, file)
