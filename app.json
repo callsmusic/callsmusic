@@ -1,0 +1,48 @@
+{
+  "name": "CallsMusic",
+  "description": " A group call streaming bot made using MarshalX/tgcalls with queue & multiple chats support.",
+  "keywords": [
+    "telegram",
+    "voicechat",
+    "music",
+    "python",
+    "pyrogram",
+    "callsmusic"
+  ],
+  "repository": "https://github.com/callsmusic/callsmusic",
+  "env": {
+    "SESSION_NAME": {
+      "description": "Pyrogram session string",
+      "required": true
+    },
+    "BOT_TOKEN": {
+      "description": "A bot token from @BotFather",
+      "required": true
+    },
+    "API_ID": {
+      "description": "App ID from my.telegram.org/apps",
+      "required": true
+    },
+    "API_HASH": {
+      "description": "App hash from my.telegram.org/apps",
+      "required": true
+    },
+    "SUDO_USERS": {
+      "description": "List of user IDs counted as admin everywhere (separated by space).",
+      "required": true
+    },
+    "DURATION_LIMIT": {
+      "description": "Max audio duration limit for downloads (minutes).",
+      "required": true,
+      "value": "10"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+    },
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
