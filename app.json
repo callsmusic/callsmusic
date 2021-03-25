@@ -1,6 +1,6 @@
 {
   "name": "CallsMusic",
-  "description": " A group call streaming bot made using MarshalX/tgcalls with queue & multiple chats support.",
+  "description": "A group call streaming bot made using MarshalX/tgcalls with queue & multiple chats support.",
   "keywords": [
     "telegram",
     "voicechat",
@@ -12,19 +12,19 @@
   "repository": "https://github.com/callsmusic/callsmusic",
   "env": {
     "SESSION_NAME": {
-      "description": "Pyrogram session string",
+      "description": "A Pyrogram session string.",
       "required": true
     },
     "BOT_TOKEN": {
-      "description": "A bot token from @BotFather",
+      "description": "A bot token from @BotFather.",
       "required": true
     },
     "API_ID": {
-      "description": "App ID from my.telegram.org/apps",
+      "description": "An app ID from https://my.telegram.org/apps.",
       "required": true
     },
     "API_HASH": {
-      "description": "App hash from my.telegram.org/apps",
+      "description": "An app hash from https://my.telegram.org/apps.",
       "required": true
     },
     "SUDO_USERS": {
