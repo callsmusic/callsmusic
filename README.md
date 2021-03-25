@@ -11,7 +11,7 @@
 
 Copy `example.env` to `.env` and fill it with your credentials.
 
-### Without Docker
+### The good way
 
 1. Install Python requirements:
    ```bash
@@ -22,7 +22,7 @@ Copy `example.env` to `.env` and fill it with your credentials.
    python main.py
    ```
 
-### Using Docker
+### Docker
 
 1. Build:
    ```bash
@@ -37,7 +37,20 @@ Copy `example.env` to `.env` and fill it with your credentials.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/callsmusic/callsmusic)
 
+## Commands
+
+| Command | Description                                          |
+| ------- | ---------------------------------------------------- |
+| /play   | play the replied audio file or YouTube video         |
+| /pause  | pause the audio stream                               |
+| /resume | resume the audio stream                              |
+| /skip   | skip the current audio stream                        |
+| /mute   | mute the userbot                                     |
+| /unmute | unmute the userbot                                   |
+| /stop   | clear the queue and remove the userbot from the call |
+
 ## License
 
 ### GNU Affero General Public License v3.0
+
 [Read more](http://www.gnu.org/licenses/#AGPL)

@@ -5,36 +5,36 @@ from pyrogram.types import Message
 
 from callsmusic import callsmusic, queues
 
-from helpers.filters import command
+from helpers.filters import command, other_filters
 from helpers.decorators import errors, authorized_users_only
 
 
-@Client.on_message(command(["pause", "p"]))
+@Client.on_message(command("pause") & other_filters)
 @errors
 @authorized_users_only
 async def pause(_, message: Message):
     if callsmusic.pause(message.chat.id):
-        await message.reply_text("⏸ Paused")
+        await message.reply_text("Paused!")
     else:
-        await message.reply_text("❗️ Nothing is playing")
+        await message.reply_text("Nothing is playing!")
 
 
-@Client.on_message(command(["resume", "r"]))
+@Client.on_message(command("resume") & other_filters)
 @errors
 @authorized_users_only
 async def resume(_, message: Message):
     if callsmusic.resume(message.chat.id):
-        await message.reply_text("🎧 Resumed")
+        await message.reply_text("Resumed!")
     else:
-        await message.reply_text("❗️ Nothing is paused")
+        await message.reply_text("Nothing is paused!")
 
 
-@Client.on_message(command(["stop", "s"]))
+@Client.on_message(command("stop") & other_filters)
 @errors
 @authorized_users_only
 async def stop(_, message: Message):
     if message.chat.id not in callsmusic.active_chats:
-        await message.reply_text("❗️ Nothing is playing")
+        await message.reply_text("Nothing is playing!")
     else:
         try:
             queues.clear(message.chat.id)
@@ -42,15 +42,15 @@ async def stop(_, message: Message):
             pass
 
         callsmusic.stop(message.chat.id)
-        await message.reply_text("✅ Cleared the queue and left the call")
+        await message.reply_text("Cleared the queue and left the call!")
 
 
-@Client.on_message(command(["skip", "f"]))
+@Client.on_message(command("skip") & other_filters)
 @errors
 @authorized_users_only
 async def skip(_, message: Message):
     if message.chat.id not in callsmusic.active_chats:
-        await message.reply_text("❗️ Nothing is playing")
+        await message.reply_text("Nothing is playing!")
     else:
         queues.task_done(message.chat.id)
 
@@ -61,32 +61,32 @@ async def skip(_, message: Message):
                 message.chat.id, queues.get(message.chat.id)["file"]
             )
 
-        await message.reply_text("Skipped.")
+        await message.reply_text("Skipped!")
 
 
-@Client.on_message(command(["mute", "m"]))
+@Client.on_message(command("mute") & other_filters)
 @errors
 @authorized_users_only
 async def mute(_, message: Message):
     result = callsmusic.mute(message.chat.id)
 
     if result == 0:
-        await message.reply_text("🔇 Muted")
+        await message.reply_text("Muted!")
     elif result == 1:
-        await message.reply_text("🔇 Already muted")
+        await message.reply_text("Already muted!")
     elif result == 2:
-        await message.reply_text("❗️ Not in voice chat")
+        await message.reply_text("Not in voice chat!")
 
 
-@Client.on_message(command(["unmute", "u"]))
+@Client.on_message(command("unmute") & other_filters)
 @errors
 @authorized_users_only
 async def unmute(_, message: Message):
     result = callsmusic.unmute(message.chat.id)
 
     if result == 0:
-        await message.reply_text("🔈 Unmuted")
+        await message.reply_text("Unmuted!")
     elif result == 1:
-        await message.reply_text("🔈 Already unmuted")
+        await message.reply_text("Already unmuted!")
     elif result == 2:
-        await message.reply_text("❗️ Not in voice chat")
+        await message.reply_text("Not in voice chat!")
