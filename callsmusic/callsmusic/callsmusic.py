@@ -18,7 +18,7 @@ from typing import Dict
 
 from pytgcalls import GroupCall
 
-import queues
+from .. import queues
 from . import client
 
 instances: Dict[int, GroupCall] = {}
