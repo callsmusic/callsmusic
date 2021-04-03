@@ -20,7 +20,6 @@ from pyrogram import Client
 from pyrogram.types import Message
 
 from callsmusic import callsmusic, queues
-
 from helpers.filters import command, other_filters
 from helpers.decorators import errors, authorized_users_only
 
@@ -29,20 +28,26 @@ from helpers.decorators import errors, authorized_users_only
 @errors
 @authorized_users_only
 async def pause(_, message: Message):
-    if callsmusic.pause(message.chat.id):
+    (
         await message.reply_text("Paused!")
-    else:
+    ) if (
+        callsmusic.pause(message.chat.id)
+    ) else (
         await message.reply_text("Nothing is playing!")
+    )
 
 
 @Client.on_message(command("resume") & other_filters)
 @errors
 @authorized_users_only
 async def resume(_, message: Message):
-    if callsmusic.resume(message.chat.id):
+    (
         await message.reply_text("Resumed!")
-    else:
+    ) if (
+        callsmusic.resume(message.chat.id)
+    ) else (
         await message.reply_text("Nothing is paused!")
+    )
 
 
 @Client.on_message(command("stop") & other_filters)
@@ -86,12 +91,17 @@ async def skip(_, message: Message):
 async def mute(_, message: Message):
     result = callsmusic.mute(message.chat.id)
 
-    if result == 0:
+    (
         await message.reply_text("Muted!")
-    elif result == 1:
+    ) if (
+        result == 0
+    ) else (
         await message.reply_text("Already muted!")
-    elif result == 2:
+    ) if (
+        result == 1
+    ) else (
         await message.reply_text("Not in voice chat!")
+    )
 
 
 @Client.on_message(command("unmute") & other_filters)
@@ -100,9 +110,14 @@ async def mute(_, message: Message):
 async def unmute(_, message: Message):
     result = callsmusic.unmute(message.chat.id)
 
-    if result == 0:
+    (
         await message.reply_text("Unmuted!")
-    elif result == 1:
-        await message.reply_text("Already unmuted!")
-    elif result == 2:
+    ) if (
+        result == 0
+    ) else (
+        await message.reply_text("Not muted!")
+    ) if (
+        result == 1
+    ) else (
         await message.reply_text("Not in voice chat!")
+    )
