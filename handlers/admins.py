@@ -19,7 +19,9 @@ from asyncio import QueueEmpty
 from pyrogram import Client
 from pyrogram.types import Message
 
-from callsmusic import callsmusic, queues
+import queues
+
+from callsmusic import callsmusic
 from helpers.filters import command, other_filters
 from helpers.decorators import errors, authorized_users_only
 
