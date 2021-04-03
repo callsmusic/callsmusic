@@ -20,14 +20,12 @@ from pyrogram import Client
 from pyrogram.types import Message, Voice
 
 from callsmusic import callsmusic, queues
-
-import converter
-from downloaders import youtube
-
 from config import DURATION_LIMIT
+from downloaders import youtube
+from helpers.decorators import errors
 from helpers.errors import DurationLimitError
 from helpers.filters import command, other_filters
-from helpers.decorators import errors
+import converter
 
 
 @Client.on_message(command("play") & other_filters)
