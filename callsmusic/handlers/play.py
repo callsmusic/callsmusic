@@ -19,7 +19,7 @@ from os import path
 from pyrogram import Client
 from pyrogram.types import Message, Voice
 
-from ...callsmusic import callsmusic
+from ..callsmusic import callsmusic
 from ..config import DURATION_LIMIT
 from .. import converter
 from ..downloaders import youtube

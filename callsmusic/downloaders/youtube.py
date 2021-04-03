@@ -18,7 +18,7 @@ from os import path
 
 from youtube_dl import YoutubeDL
 
-from config import DURATION_LIMIT
+from ..config import DURATION_LIMIT
 from ..helpers.errors import DurationLimitError
 
 ytdl = YoutubeDL(

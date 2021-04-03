@@ -25,7 +25,7 @@ bot = Bot(
     API_ID,
     API_HASH,
     bot_token=BOT_TOKEN,
-    plugins=dict(root="handlers")
+    plugins={"root": "callsmusic.handlers"}
 )
 
 bot.start()
