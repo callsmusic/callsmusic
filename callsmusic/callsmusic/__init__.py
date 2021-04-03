@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from pyrogram import Client
-from . import config
+from .. import config
 
 client = Client(config.SESSION_NAME, config.API_ID, config.API_HASH)
 run = client.run
