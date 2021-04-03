@@ -18,11 +18,11 @@ from typing import List
 
 from pyrogram.types import Chat, User
 
-import cache.admins
+import admins
 
 
 async def get_administrators(chat: Chat) -> List[User]:
-    get = cache.admins.get(chat.id)
+    get = admins.get(chat.id)
 
     if get:
         return get
@@ -34,5 +34,5 @@ async def get_administrators(chat: Chat) -> List[User]:
             if administrator.can_manage_voice_chats:
                 to_set.append(administrator.user.id)
 
-        cache.admins.set(chat.id, to_set)
+        admins.set(chat.id, to_set)
         return await get_administrators(chat)

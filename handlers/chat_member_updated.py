@@ -17,7 +17,7 @@
 from pyrogram import Client
 from pyrogram.types import ChatMemberUpdated
 
-from cache import admins as cache
+import admins
 
 
 @Client.on_chat_member_updated()
@@ -26,7 +26,7 @@ async def chat_member_updated(_, chat_member_updated: ChatMemberUpdated):
     new = chat_member_updated.new_chat_member
 
     (
-        cache.admins[chat].append(new.user.id)
+        admins.admins[chat].append(new.user.id)
     ) if (
         (
             new.can_manage_voice_chats
@@ -34,7 +34,7 @@ async def chat_member_updated(_, chat_member_updated: ChatMemberUpdated):
             new.user.id not in cache.admins[chat]
         )
     ) else (
-        cache.admins[chat].remove(new.user.id)
+        admins.admins[chat].remove(new.user.id)
     ) if (
-        new.user.id in cache.admins[chat]
+        new.user.id in admins.admins[chat]
     ) else None
