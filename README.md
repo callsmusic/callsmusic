@@ -1,4 +1,4 @@
-# Calls Music 1 — A [pytgcalls](https://github.com/MarshalX/tgcalls)-based Telegram group call audio streaming bot with queue and multiple chat support
+# Calls Music 1 — A multi-chat Telegram group call audio streaming bot based on [tgcalls](https://github.com/MarshalX/tgcalls)
 
 ## Requirements
 
