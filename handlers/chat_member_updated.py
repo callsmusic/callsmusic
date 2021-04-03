@@ -22,19 +22,24 @@ import admins
 
 @Client.on_chat_member_updated()
 async def chat_member_updated(_, chat_member_updated: ChatMemberUpdated):
-    chat = chat_member_updated.chat.id
-    new = chat_member_updated.new_chat_member
-
     (
-        admins.admins[chat].append(new.user.id)
+        admins.admins[chat_member_updated.chat.id].append(
+            chat_member_updated.new_chat_member.user.id
+        )
     ) if (
         (
-            new.can_manage_voice_chats
+            chat_member_updated.new_chat_member.can_manage_voice_chats
         ) and (
-            new.user.id not in admins.admins[chat]
+            (
+                chat_member_updated.new_chat_member.user.id
+            ) not in admins.admins[chat_member_updated.chat.id]
         )
     ) else (
-        admins.admins[chat].remove(new.user.id)
+        admins.admins[chat_member_updated.chat.id].remove(
+            chat_member_updated.new_chat_member.user.id
+        )
     ) if (
-        new.user.id in admins.admins[chat]
+        (
+            chat_member_updated.new_chat_member.user.id
+        ) in admins.admins[chat_member_updated.chat.id]
     ) else None
