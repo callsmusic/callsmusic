@@ -31,7 +31,7 @@ async def chat_member_updated(_, chat_member_updated: ChatMemberUpdated):
         (
             new.can_manage_voice_chats
         ) and (
-            new.user.id not in cache.admins[chat]
+            new.user.id not in admins.admins[chat]
         )
     ) else (
         admins.admins[chat].remove(new.user.id)
