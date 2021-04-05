@@ -1,17 +1,17 @@
-# Calls Music 1 — A multi-chat Telegram group call audio streaming bot based on [tgcalls](https://github.com/MarshalX/tgcalls)
+# 🎧 Calls Music 1 — A multi-chat Telegram group call audio streaming bot based on [tgcalls](https://github.com/MarshalX/tgcalls)
 
-## Requirements
+## ✍️ Requirements
 
 - FFmpeg
 - Python 3.7+
 
-## Deployment
+## 🚀 Deployment
 
-### Config
+### 🛠 Config
 
 Copy `example.env` to `.env` and fill it with your credentials.
 
-### The good way
+### ✨ The good way
 
 1. Install Python requirements:
    ```bash
@@ -22,7 +22,7 @@ Copy `example.env` to `.env` and fill it with your credentials.
    python -m callsmusic
    ```
 
-### Docker
+### 🐬 Docker
 
 1. Build:
    ```bash
@@ -33,11 +33,11 @@ Copy `example.env` to `.env` and fill it with your credentials.
    docker run --env-file .env musicplayer
    ```
 
-### Heroku
+### 💵 Heroku
 
 [Click here](https://heroku.com/deploy?template=https://github.com/callsmusic/callsmusic)
 
-## Commands
+## ℹ️ Commands
 
 | Command | Description                                          |
 | ------- | ---------------------------------------------------- |
@@ -49,7 +49,7 @@ Copy `example.env` to `.env` and fill it with your credentials.
 | /unmute | unmute the userbot                                   |
 | /stop   | clear the queue and remove the userbot from the call |
 
-## License
+## 📄 License
 
 ### GNU Affero General Public License v3.0
 
