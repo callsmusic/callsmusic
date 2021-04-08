@@ -23,25 +23,25 @@ from ..helpers.filters import other_filters2
 @Client.on_message(other_filters2)
 async def start(_, message: Message):
     await message.reply_text(
-        f"""I am an open-source @CallsMusic bot, I let you play music in your group’s voice chat.
+        f""" saya adalah bot music wanclub.
 
-The commands I currently support are:
+disinilah  fitur coment music yang kamu ingin jalankan:
 
-/play - play the replied audio file or YouTube video
-/pause - pause the audio stream
-/resume - resume the audio stream
-/skip - skip the current audio stream
-/mute - mute the userbot
-/unmute - unmute the userbot
-/stop - clear the queue and remove the userbot from the call""",
+/play - play music replay music akan mulai otomatis
+/pause - berhenti sementara
+/resume -  behenti sementara
+/skip - pindah lagu lainnya
+/mute - mute bot
+/unmute - unmute bot
+/stop - clear berhenti total """,
         reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "Group", url="https://t.me/callsmusicchat"
+                        "⚒️Group🛠️", url="https://t.me/antigabutbrothers"
                     ),
                     InlineKeyboardButton(
-                        "Channel", url="https://t.me/callsmusic"
+                        "💬Channel💬", url="https://t.me/sadnesstalk"
                     )
                 ]
             ]
