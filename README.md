@@ -1,11 +1,4 @@
-# Calls Music — Telegram bot + userbot for streaming audio in group calls.
-
-## Specialities
-
-- Can stream in multiple group calls at the same time.
-- Queue support.
-- Can stream audio files, voice messages and YouTube videos.
-- Can be deployed on Heroku.
+# Calls Music — Telegram bot + userbot for streaming audio in group calls
 
 ## Requirements
 
