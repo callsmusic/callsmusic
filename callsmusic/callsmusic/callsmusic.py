@@ -1,25 +1,9 @@
-# Calls Music 1 - Telegram bot for streaming audio in group calls
-# Copyright (C) 2021  Roj Serbest
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 from typing import Dict
 
 from pytgcalls import GroupCall
 
-from .. import queues
 from . import client
+from .. import queues
 
 instances: Dict[int, GroupCall] = {}
 active_chats: Dict[int, Dict[str, bool]] = {}
@@ -38,7 +22,7 @@ def init_instance(chat_id: int):
         if queues.is_empty(chat_id):
             await stop(chat_id)
         else:
-            instance.input_filename = queues.get(chat_id)["file"]
+            instance.input_filename = queues.get(chat_id)['file']
 
 
 def get_instance(chat_id: int) -> GroupCall:
@@ -48,7 +32,7 @@ def get_instance(chat_id: int) -> GroupCall:
 
 async def start(chat_id: int):
     await get_instance(chat_id).start(chat_id)
-    active_chats[chat_id] = {"playing": True, "muted": False}
+    active_chats[chat_id] = {'playing': True, 'muted': False}
 
 
 async def stop(chat_id: int):
@@ -67,42 +51,42 @@ async def set_stream(chat_id: int, file: str):
 def pause(chat_id: int) -> bool:
     if chat_id not in active_chats:
         return False
-    elif not active_chats[chat_id]["playing"]:
+    elif not active_chats[chat_id]['playing']:
         return False
 
     get_instance(chat_id).pause_playout()
-    active_chats[chat_id]["playing"] = False
+    active_chats[chat_id]['playing'] = False
     return True
 
 
 def resume(chat_id: int) -> bool:
     if chat_id not in active_chats:
         return False
-    elif active_chats[chat_id]["playing"]:
+    elif active_chats[chat_id]['playing']:
         return False
 
     get_instance(chat_id).resume_playout()
-    active_chats[chat_id]["playing"] = True
+    active_chats[chat_id]['playing'] = True
     return True
 
 
 def mute(chat_id: int) -> int:
     if chat_id not in active_chats:
         return 2
-    elif active_chats[chat_id]["muted"]:
+    elif active_chats[chat_id]['muted']:
         return 1
 
     get_instance(chat_id).set_is_mute(True)
-    active_chats[chat_id]["muted"] = True
+    active_chats[chat_id]['muted'] = True
     return 0
 
 
 def unmute(chat_id: int) -> int:
     if chat_id not in active_chats:
         return 2
-    elif not active_chats[chat_id]["muted"]:
+    elif not active_chats[chat_id]['muted']:
         return 1
 
     get_instance(chat_id).set_is_mute(False)
-    active_chats[chat_id]["muted"] = False
+    active_chats[chat_id]['muted'] = False
     return 0

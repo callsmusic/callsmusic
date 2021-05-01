@@ -1,14 +1,7 @@
 {
-  "name": "CallsMusic",
-  "description": "A group call streaming bot made using MarshalX/tgcalls with queue & multiple chats support.",
-  "keywords": [
-    "telegram",
-    "voicechat",
-    "music",
-    "python",
-    "pyrogram",
-    "callsmusic"
-  ],
+  "name": "Calls Music",
+  "description": "Telegram bot + userbot for streaming audio in group calls.",
+  "keywords": ["telegram", "python"],
   "repository": "https://github.com/callsmusic/callsmusic",
   "env": {
     "SESSION_NAME": {
