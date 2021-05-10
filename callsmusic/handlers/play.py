@@ -45,27 +45,32 @@ async def play(_, message: Message):
             ) else file_name,
         )
     else:
-        messages = [message]
-        text = ''
-        offset = -1
-        length = -1
         if message.reply_to_message:
-            messages.append(message.reply_to_message)
-        for _message in messages:
-            if offset:
-                break
-            if _message.entities:
-                for entity in _message.entities:
-                    if entity.type == 'url':
-                        text = _message.text or _message.caption
-                        offset, length = entity.offset, entity.length
-                        break
-        if offset == -1:
+            text = message.reply_to_message.text \
+                or message.reply_to_message.caption
+        else:
+            text = message.text or message.caption
+
+        entities = message.entities + \
+            (
+                message.reply_to_message.entities
+                or message.reply_to_message.caption_entities
+            )
+        urls = [entity for entity in entities if entity.type == 'url']
+        text_links = [
+            entity for entity in entities if entity.type == 'text_link'
+        ]
+
+        if urls:
+            url = text[urls[0].offset:urls[0].offset + urls[0].length]
+        elif text_links:
+            url = text_links[0].url
+        else:
             await response.edit_text(
                 '<b>❌ You did not give me anything to play</b>',
             )
             return
-        url = text[offset:offset + length]
+
         file = await converter.convert(youtube.download(url))
     if message.chat.id in callsmusic.active_chats:
         position = await queues.put(message.chat.id, file=file)
