@@ -25,6 +25,18 @@ def init_instance(chat_id: int):
             instance.input_filename = queues.get(chat_id)['file']
 
 
+def remove(chat_id: int):
+    if chat_id in instances:
+        instances[chat_id].stop()
+        del instances[chat_id]
+
+    if not queues.is_empty(chat_id):
+        queues.clear(chat_id)
+
+    if chat_id in active_chats:
+        del active_chats[chat_id]
+
+
 def get_instance(chat_id: int) -> GroupCall:
     init_instance(chat_id)
     return instances[chat_id]
