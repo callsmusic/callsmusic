@@ -27,7 +27,6 @@ def init_instance(chat_id: int):
 
 def remove(chat_id: int):
     if chat_id in instances:
-        instances[chat_id].stop()
         del instances[chat_id]
 
     if not queues.is_empty(chat_id):
