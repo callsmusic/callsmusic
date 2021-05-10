@@ -9,17 +9,16 @@ from ..helpers.filters import other_filters2
 @Client.on_message(other_filters2)
 async def start(_, message: Message):
     await message.reply_text(
-        """I am an open-source @CallsMusic bot, I let you play music in your group’s voice chat.
-
-The commands I currently support are:
-
-/play - play the replied audio file or YouTube video
-/pause - pause the audio stream
-/resume - resume the audio stream
-/skip - skip the current audio stream
-/mute - mute the userbot
-/unmute - unmute the userbot
-/stop - clear the queue and remove the userbot from the call""",
+        'I am an open-source @CallsMusic bot, '
+        'I let you play music in your group’s voice chat.'
+        '\n\nThe commands I currently support are:\n\n'
+        '/play - play the replied audio file or YouTube video\n'
+        '/pause - pause the audio stream\n'
+        '/resume - resume the audio stream\n'
+        '/skip - skip the current audio stream\n'
+        '/mute - mute the userbot\n'
+        '/unmute - unmute the userbot\n'
+        '/stop - clear the queue and remove the userbot from the call',
         reply_markup=InlineKeyboardMarkup(
             [
                 [

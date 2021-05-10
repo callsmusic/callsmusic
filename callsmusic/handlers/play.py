@@ -18,12 +18,16 @@ from ..helpers.filters import other_filters
 @Client.on_message(command('play') & other_filters)
 @errors
 async def play(_, message: Message):
-    audio = (message.reply_to_message.audio or message.reply_to_message.voice) if message.reply_to_message else None
+    audio = (
+        message.reply_to_message.audio or message.reply_to_message.voice
+    ) if message.reply_to_message else None
     response = await message.reply_text('Processing...', False)
     if audio:
         if round(audio.duration / 60) > DURATION_LIMIT:
             raise DurationLimitError(
-                f'Videos longer than {DURATION_LIMIT} minute(s) aren’t allowed, the provided audio is {round(audio.duration / 60)} minute(s)',
+                f'Audios longer than {DURATION_LIMIT} minute(s) '
+                'are not allowed, the provided audio is '
+                f'{round(audio.duration / 60)} minute(s)',
             )
         file_name = audio.file_unique_id + '.' + (
             (
