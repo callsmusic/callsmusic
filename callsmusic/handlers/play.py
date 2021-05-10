@@ -21,7 +21,7 @@ async def play(_, message: Message):
     audio = (
         message.reply_to_message.audio or message.reply_to_message.voice
     ) if message.reply_to_message else None
-    response = await message.reply_text('Processing...', False)
+    response = await message.reply_text('<b>🔄 Processing...</b>', False)
     if audio:
         if round(audio.duration / 60) > DURATION_LIMIT:
             raise DurationLimitError(
@@ -61,13 +61,17 @@ async def play(_, message: Message):
                         offset, length = entity.offset, entity.length
                         break
         if offset == -1:
-            await response.edit_text('You did not give me anything to play!')
+            await response.edit_text(
+                '<b>❌ You did not give me anything to play</b>',
+            )
             return
         url = text[offset:offset + length]
         file = await converter.convert(youtube.download(url))
     if message.chat.id in callsmusic.active_chats:
         position = await queues.put(message.chat.id, file=file)
-        await response.edit_text(f'Queued at position {position}!')
+        await response.edit_text(
+            f'<b>#️⃣ Queued at position {position}</b>...',
+        )
     else:
         await callsmusic.set_stream(message.chat.id, file)
-        await response.edit_text('Playing...')
+        await response.edit_text('<b>▶️ Playing...</b>')
