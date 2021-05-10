@@ -1,13 +1,13 @@
 # Calls Music — Telegram bot + userbot for streaming audio in group calls
 
-## Requirements
+## ✍🏻 Requirements
 
 - FFmpeg
 - Python 3.7+
 
-## Deployment
+## 🚀 Deployment
 
-### Config
+### 🛠 Configuration
 
 1. Copy `example.env` to `.env` and fill it with your credentials.
 2. Install Python requirements:
@@ -19,7 +19,7 @@
    python -m callsmusic
    ```
 
-### Docker
+### 🐬 Docker
 
 1. Build:
    ```bash
@@ -30,11 +30,11 @@
    docker run --env-file .env musicplayer
    ```
 
-### Heroku
+### 💜 Heroku
 
-[Click here](https://heroku.com/deploy?template=https://github.com/callsmusic/callsmusic)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/callsmusic/callsmusic)
 
-## Commands
+## ℹ️ Commands
 
 | Command | Description                                          |
 | ------- | ---------------------------------------------------- |
@@ -46,13 +46,13 @@
 | /unmute | unmute the userbot                                   |
 | /stop   | clear the queue and remove the userbot from the call |
 
-## License
+## 📄 License
 
-### GNU Affero General Public License v3.0
+### GNU Affero General Public License v3.0-or-later
 
 [Read more](http://www.gnu.org/licenses/#AGPL)
 
-## Credits
+## ✨ Credits
 
 - Il'ya ([tgcalls](https://github.com/MarshalX/tgcalls))
 - Dan ([pyrogram](https://github.com/pyrogram/pyrogram))
