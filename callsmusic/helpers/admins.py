@@ -1,7 +1,6 @@
 from typing import List
 
 from pyrogram.types import Chat
-from pyrogram.types import User
 
 from .. import admins
 
