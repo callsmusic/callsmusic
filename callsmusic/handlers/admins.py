@@ -5,11 +5,11 @@ from pyrogram.types import Message
 
 from .. import queues
 from ..callsmusic import callsmusic
+from ..helpers.chat_id import get_chat_id
 from ..helpers.decorators import authorized_users_only
 from ..helpers.decorators import errors
 from ..helpers.filters import command
 from ..helpers.filters import other_filters
-from ..helpers.chat_id import get_chat_id
 
 
 @Client.on_message(command('pause') & other_filters)
