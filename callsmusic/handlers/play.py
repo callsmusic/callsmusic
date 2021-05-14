@@ -51,15 +51,11 @@ async def play(_, message: Message):
         if message.reply_to_message:
             text = message.reply_to_message.text \
                 or message.reply_to_message.caption
-            reply_entities = message.reply_to_message.entities or []
+            reply_entities = message.reply_to_message.entities or message.reply_to_message.caption_entities
         else:
             text = message.text or message.caption
 
-        entities = message.entities + \
-            (
-                message.reply_to_message.entities
-                or reply_entities
-            )
+        entities = message.entities + reply_entities or []
         urls = [entity for entity in entities if entity.type == 'url']
         text_links = [
             entity for entity in entities if entity.type == 'text_link'
