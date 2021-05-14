@@ -37,13 +37,15 @@ async def play(_, message: Message):
                 not isinstance(audio, Voice)
             ) else 'ogg'
         )
+        file_name = path.join(path.realpath('downloads'), file_name)
         file = await converter.convert(
             (
                 await message.reply_to_message.download(file_name)
             )
             if (
-                not path.isfile(path.join('downloads', file_name))
-            ) else file_name,
+                not path.isfile(file_name)
+            )
+            else file_name,
         )
     else:
         if message.reply_to_message:
