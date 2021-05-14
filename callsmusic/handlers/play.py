@@ -48,14 +48,21 @@ async def play(_, message: Message):
             else file_name,
         )
     else:
+        entities = []
+        if message.entities:
+            entities += entities
+        elif message.caption_entities:
+            entities += message.caption_entities
         if message.reply_to_message:
             text = message.reply_to_message.text \
                 or message.reply_to_message.caption
-            reply_entities = message.reply_to_message.entities or message.reply_to_message.caption_entities
+            if message.reply_to_message.entities:
+                entities = message.reply_to_message.entities + entities
+            elif message.reply_to_message.caption_entities:
+                entities = message.reply_to_message.entities + entities
         else:
             text = message.text or message.caption
 
-        entities = message.entities + reply_entities or []
         urls = [entity for entity in entities if entity.type == 'url']
         text_links = [
             entity for entity in entities if entity.type == 'text_link'
