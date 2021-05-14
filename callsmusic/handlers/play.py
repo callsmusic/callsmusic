@@ -13,6 +13,7 @@ from ..helpers.decorators import errors
 from ..helpers.errors import DurationLimitError
 from ..helpers.filters import command
 from ..helpers.filters import other_filters
+from ..helpers.chat_id import get_chat_id
 
 
 @Client.on_message(command('play') & other_filters)
@@ -72,11 +73,12 @@ async def play(_, message: Message):
             return
 
         file = await converter.convert(youtube.download(url))
-    if message.chat.id in callsmusic.active_chats:
-        position = await queues.put(message.chat.id, file=file)
+    chat_id = get_chat_id(message.chat)
+    if chat_id in callsmusic.active_chats:
+        position = await queues.put(chat_id, file=file)
         await response.edit_text(
             f'<b>#️⃣ Queued at position {position}</b>...',
         )
     else:
-        await callsmusic.set_stream(message.chat.id, file)
+        await callsmusic.set_stream(chat_id, file)
         await response.edit_text('<b>▶️ Playing...</b>')

@@ -9,6 +9,7 @@ from ..helpers.decorators import authorized_users_only
 from ..helpers.decorators import errors
 from ..helpers.filters import command
 from ..helpers.filters import other_filters
+from ..helpers.chat_id import get_chat_id
 
 
 @Client.on_message(command('pause') & other_filters)
@@ -18,7 +19,7 @@ async def pause(_, message: Message):
     (
         await message.reply_text('<b>⏸ Paused</b>', False)
     ) if (
-        callsmusic.pause(message.chat.id)
+        callsmusic.pause(get_chat_id(message.chat))
     ) else (
         await message.reply_text('<b>❌ Nothing is playing</b>', False)
     )
@@ -31,7 +32,7 @@ async def resume(_, message: Message):
     (
         await message.reply_text('<b>▶️ Resumed</b>', False)
     ) if (
-        callsmusic.resume(message.chat.id)
+        callsmusic.resume(get_chat_id(message.chat))
     ) else (
         await message.reply_text('<b>❌ Nothing is paused</b>', False)
     )
@@ -41,14 +42,15 @@ async def resume(_, message: Message):
 @errors
 @authorized_users_only
 async def stop(_, message: Message):
-    if message.chat.id not in callsmusic.active_chats:
+    chat_id = get_chat_id(message.chat)
+    if chat_id not in callsmusic.active_chats:
         await message.reply_text('<b>❌ Nothing is playing</b>', False)
     else:
         try:
-            queues.clear(message.chat.id)
+            queues.clear(chat_id)
         except QueueEmpty:
             pass
-        await callsmusic.stop(message.chat.id)
+        await callsmusic.stop(chat_id)
         await message.reply_text('<b>⏹ Stopped streaming</b>', False)
 
 
@@ -56,16 +58,17 @@ async def stop(_, message: Message):
 @errors
 @authorized_users_only
 async def skip(_, message: Message):
-    if message.chat.id not in callsmusic.active_chats:
+    chat_id = get_chat_id(message.chat)
+    if chat_id not in callsmusic.active_chats:
         await message.reply_text('<b>❌ Nothing is playing</b>', False)
     else:
-        queues.task_done(message.chat.id)
-        if queues.is_empty(message.chat.id):
-            await callsmusic.stop(message.chat.id)
+        queues.task_done(chat_id)
+        if queues.is_empty(chat_id):
+            await callsmusic.stop(chat_id)
         else:
             await callsmusic.set_stream(
-                message.chat.id,
-                queues.get(message.chat.id)['file'],
+                chat_id,
+                queues.get(chat_id)['file'],
             )
         await message.reply_text('<b>✅ Skipped</b>', False)
 
@@ -74,7 +77,7 @@ async def skip(_, message: Message):
 @errors
 @authorized_users_only
 async def mute(_, message: Message):
-    result = callsmusic.mute(message.chat.id)
+    result = callsmusic.mute(get_chat_id(message.chat))
     (
         await message.reply_text('<b>✅ Muted</b>', False)
     ) if (
@@ -92,7 +95,7 @@ async def mute(_, message: Message):
 @errors
 @authorized_users_only
 async def unmute(_, message: Message):
-    result = callsmusic.unmute(message.chat.id)
+    result = callsmusic.unmute(get_chat_id(message.chat))
     (
         await message.reply_text('<b>✅ Unmuted</b>', False)
     ) if (
